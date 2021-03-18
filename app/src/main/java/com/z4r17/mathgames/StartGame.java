@@ -1,21 +1,28 @@
 package com.z4r17.mathgames;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class StartGame extends AppCompatActivity {
 
-    int op1, op2 ,sum;
+    int op1, op2 ,sum, sumOthers;
     TextView tvTimer, tvPoints, tvSum, tvResult;
     Button btn0,btn1,btn2,btn3;
     CountDownTimer countDownTimer;
     long millisUntilFinished;
     int points, numberofQuestions;
-
+    Random random;
+    int [] btnIds;
+    int correctAnswerPosition;
+    ArrayList<Integer> incorrectAnswers;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,6 +44,10 @@ public class StartGame extends AppCompatActivity {
         millisUntilFinished = 30100;
         points = 0;
         numberofQuestions =0;
+        random = new Random();
+        btnIds = new int[]{R.id.btn0,R.id.btn1,R.id.btn2,R.id.btn3};
+        correctAnswerPosition = 0;
+        incorrectAnswers= new ArrayList<>();
         startGame();
     }
 
@@ -44,6 +55,8 @@ public class StartGame extends AppCompatActivity {
 
         tvTimer.setText(""+ (millisUntilFinished/ 1000) + "s");
         tvPoints.setText(""+points+"/"+ numberofQuestions);
+        generateQuestion();
+
         countDownTimer = new CountDownTimer(millisUntilFinished,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -59,8 +72,45 @@ public class StartGame extends AppCompatActivity {
 
             }
         }.start();
+    }
 
+    private void generateQuestion() {
+        numberofQuestions++;
+        op1 = random.nextInt(10);
+        op2 = random.nextInt(10);
+        sum = op1 + op2;
+        tvSum.setText(op1 + " + " + op2 + " = ");
+        correctAnswerPosition = random.nextInt(4);
 
+        ((Button)findViewById(btnIds[correctAnswerPosition])).setText("" + sum);
+        while (true){
+            if (incorrectAnswers.size() > 3) break;
+            op1 = random.nextInt(10);
+            op2 = random.nextInt(10);
+            sumOthers = op1 + op2;
+            if (sumOthers == sum)
+                continue;
+                incorrectAnswers.add(sumOthers);
+        }
+        for (int i=0; i < 3; i++){
+            if (i == correctAnswerPosition)
+                continue;
+            ((Button) findViewById(btnIds[i])).setText("" + incorrectAnswers.get(i));
+        }
+        incorrectAnswers.clear();
+    }
+
+    public void chooseAnswer(View view) {
+        int answer = Integer.parseInt(((Button) view).getText().toString());
+        if (answer == sum){
+              points++;
+//            tvPoints.setText(points + "/" + numberofQuestions);
+            tvResult.setText("Correct!");
+        } else {
+            tvPoints.setText(points + "/" + numberofQuestions);
+            tvResult.setText("Wrong!");
+        }
+        generateQuestion();
     }
 }
 
