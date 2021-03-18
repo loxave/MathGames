@@ -83,11 +83,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -99,10 +94,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="7"
+                    android:background="#0093D1"
                     android:onClick="chooseAnswer"
-                    android:textSize="80sp"
-                    android:background="#0093D1"/>
+                    android:text="7"
+                    android:textSize="80sp" />
 
                 <Button
                     android:id="@+id/btn1"
@@ -116,31 +111,30 @@
                     android:textSize="80sp" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/btn2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="7"
-                    android:background="#F4D00C"
-                    android:textSize="80sp"
-                    android:onClick="chooseAnswer"/>
+            <Button
+                android:id="@+id/btn2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#F4D00C"
+                android:onClick="chooseAnswer"
+                android:text="7"
+                android:textSize="80sp" />
 
-                <Button
-                    android:id="@+id/btn3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="7"
-                    android:background="#E0A025"
-                    android:textSize="80sp"
-                    android:onClick="chooseAnswer"/>
-            </LinearLayout>
+            <Button
+                android:id="@+id/btn3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#E0A025"
+                android:onClick="chooseAnswer"
+                android:text="7"
+                android:textSize="80sp" />
         </LinearLayout>
 
         <ImageView

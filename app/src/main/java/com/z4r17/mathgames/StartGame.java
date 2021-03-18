@@ -1,4 +1,5 @@
 package com.z4r17.mathgames;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -28,6 +29,7 @@ public class StartGame extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_game);
+        getSupportActionBar().hide();
 
         op1 = 0;
         op2 = 0;
@@ -69,6 +71,10 @@ public class StartGame extends AppCompatActivity {
                 btn1.setClickable(false);
                 btn2.setClickable(false);
                 btn3.setClickable(false);
+                Intent intent = new Intent(StartGame.this, GameOver.class);
+                intent.putExtra("points", points);
+                startActivity(intent);
+                finish();
 
             }
         }.start();
