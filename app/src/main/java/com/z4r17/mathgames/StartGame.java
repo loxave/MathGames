@@ -14,7 +14,7 @@ import java.util.Random;
 
 public class StartGame extends AppCompatActivity {
 
-    int op1, op2 ,sum, sumOthers;
+    int op1, op2 ,correctAnswer, incorrectAnswer;
     TextView tvTimer, tvPoints, tvSum, tvResult;
     Button btn0,btn1,btn2,btn3;
     CountDownTimer countDownTimer;
@@ -24,6 +24,7 @@ public class StartGame extends AppCompatActivity {
     int [] btnIds;
     int correctAnswerPosition;
     ArrayList<Integer> incorrectAnswers;
+    String[] operatorArray;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,8 +34,8 @@ public class StartGame extends AppCompatActivity {
 
         op1 = 0;
         op2 = 0;
-        sum= 0;
-
+        correctAnswer= 0;
+        incorrectAnswer = 0;
         tvTimer = findViewById(R.id.tvTimer);
         tvPoints = findViewById(R.id.tvPoints);
         tvSum = findViewById(R.id.tvSum);
@@ -50,6 +51,7 @@ public class StartGame extends AppCompatActivity {
         btnIds = new int[]{R.id.btn0,R.id.btn1,R.id.btn2,R.id.btn3};
         correctAnswerPosition = 0;
         incorrectAnswers= new ArrayList<>();
+        operatorArray= new String[]{"+", "-", "*", "÷"};
         startGame();
     }
 
@@ -83,20 +85,21 @@ public class StartGame extends AppCompatActivity {
     private void generateQuestion() {
         numberofQuestions++;
         op1 = random.nextInt(10);
-        op2 = random.nextInt(10);
-        sum = op1 + op2;
+        op2 = 1 + random.nextInt(9);
+        String selectedOperator = operatorArray[random.nextInt(4)];
+        correctAnswer = op1 + op2;
         tvSum.setText(op1 + " + " + op2 + " = ");
         correctAnswerPosition = random.nextInt(4);
 
-        ((Button)findViewById(btnIds[correctAnswerPosition])).setText("" + sum);
+        ((Button)findViewById(btnIds[correctAnswerPosition])).setText("" + correctAnswer);
         while (true){
             if (incorrectAnswers.size() > 3) break;
             op1 = random.nextInt(10);
-            op2 = random.nextInt(10);
-            sumOthers = op1 + op2;
-            if (sumOthers == sum)
+            op2 = 1 + random.nextInt(9);
+            incorrectAnswer = op1 + op2;
+            if (incorrectAnswer== correctAnswer)
                 continue;
-                incorrectAnswers.add(sumOthers);
+                incorrectAnswers.add(incorrectAnswer);
         }
         for (int i=0; i < 3; i++){
             if (i == correctAnswerPosition)
@@ -108,7 +111,7 @@ public class StartGame extends AppCompatActivity {
 
     public void chooseAnswer(View view) {
         int answer = Integer.parseInt(((Button) view).getText().toString());
-        if (answer == sum){
+        if (answer == correctAnswer){
               points++;
 //            tvPoints.setText(points + "/" + numberofQuestions);
             tvResult.setText("Correct!");
