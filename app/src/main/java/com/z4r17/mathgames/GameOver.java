@@ -31,9 +31,10 @@ public class GameOver extends AppCompatActivity {
         int pointsSP = sharedPreferences.getInt("pointsSP",0);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         if (points > pointsSP){
-            points =  points;
+            pointsSP =  points;
             editor.putInt("pointsSP",pointsSP);
             editor.commit();
+            ivHighScore.setVisibility(View.VISIBLE);
 
         }
         tvPoints.setText("" + points);
