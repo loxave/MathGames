@@ -1,3 +1,3 @@
 # MathGames
 
-documentation is coming soon
+Documentation is coming soon
