@@ -87,8 +87,8 @@ public class StartGame extends AppCompatActivity {
         op1 = random.nextInt(10);
         op2 = 1 + random.nextInt(9);
         String selectedOperator = operatorArray[random.nextInt(4)];
-        correctAnswer = op1 + op2;
-        tvSum.setText(op1 + " + " + op2 + " = ");
+        correctAnswer = getAnswer(selectedOperator);
+        tvSum.setText(op1 + " " +selectedOperator + " " + op2 + " = ");
         correctAnswerPosition = random.nextInt(4);
 
         ((Button)findViewById(btnIds[correctAnswerPosition])).setText("" + correctAnswer);
@@ -96,7 +96,8 @@ public class StartGame extends AppCompatActivity {
             if (incorrectAnswers.size() > 3) break;
             op1 = random.nextInt(10);
             op2 = 1 + random.nextInt(9);
-            incorrectAnswer = op1 + op2;
+            selectedOperator = operatorArray[random.nextInt(4)];
+            incorrectAnswer = getAnswer(selectedOperator);
             if (incorrectAnswer== correctAnswer)
                 continue;
                 incorrectAnswers.add(incorrectAnswer);
@@ -107,6 +108,28 @@ public class StartGame extends AppCompatActivity {
             ((Button) findViewById(btnIds[i])).setText("" + incorrectAnswers.get(i));
         }
         incorrectAnswers.clear();
+    }
+
+    private int getAnswer(String selectedOperator) {
+        int answer = 0;
+        switch (selectedOperator){
+            case "+":
+                answer = op1 + op2;
+                break;
+
+            case "-":
+                answer = op1 - op2;
+                break;
+
+            case "/":
+                answer = op1 * op2;
+                break;
+
+            case "÷":
+                answer = op1 / op2;
+                break;
+        }
+        return answer;
     }
 
     public void chooseAnswer(View view) {
