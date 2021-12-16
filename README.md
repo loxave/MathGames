@@ -1,6 +1,6 @@
 # MathGames
 
-Math Games is a simple game Android math using Java
+Math Games is a simple game Android created using Java
 
 ![photo6262476941282093951](https://user-images.githubusercontent.com/70325408/112487404-4157d300-8daf-11eb-8bce-0fad168dabfe.jpg)
 
